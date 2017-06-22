@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corporation 2014, 2015.
+ * (C) Copyright IBM Corporation 2014, 2017.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ class InstallLibertyTask extends AbstractTask {
     }
 
     private Map<String, String> buildInstallLibertyMap(Project project) {
-		def maven_repo = "http://repo1.maven.org/maven2/com/ibm/websphere/appserver/runtime/"
-		def defaultType = "webProfile7"
-		def defaultVersion = "17.0.0.2"
+		final maven_repo = "http://repo1.maven.org/maven2/com/ibm/websphere/appserver/runtime/"
+		final defaultType = "webProfile7"
+		final defaultVersion = "17.0.0.2"
 		
         Map<String, String> result = new HashMap();
         if (project.liberty.install.licenseCode != null) {
@@ -42,22 +42,22 @@ class InstallLibertyTask extends AbstractTask {
         if (project.liberty.install.runtimeUrl != null) {
             result.put('runtimeUrl', project.liberty.install.runtimeUrl)
         } else if (project.liberty.install.repository == "maven") {
-			println("INFO: Maven respository is  used")
+			logger.debug 'Getting WebSphere Liberty server from Maven repository.'
 			
 			if (project.liberty.install.version != null) {
 				result.put('version', project.liberty.install.version)
-				println("INFO: Version is passed :  " + result.getAt('version'))
+				logger.debug 'Version of WebSphere Liberty server is ' + result.getAt('version')
 			} else {
 				result.put('version', defaultVersion)
-				println("INFO: Default Version is used : " + result.getAt('version'))
+				logger.debug 'Default version of WebSphere Liberty server is ' + defaultVersion
 			}
 	
 			if (project.liberty.install.type != null) {
 				result.put('type', project.liberty.install.type)
-				println("INFO: type is passed :  " + result.getAt('type'))
+				logger.debug 'WebSphere Liberty runtime type is ' + project.liberty.install.type
 			} else {
 				result.put('type', defaultType)
-				println("INFO: Default Type is used : " + result.getAt('type'))
+				logger.debug 'Default WebSphere Liberty runtime type is ' + defaultType
 			}
 			
 			result.put('runtimeUrl', maven_repo + "wlp-" + 
@@ -65,7 +65,7 @@ class InstallLibertyTask extends AbstractTask {
 				result.getAt('version') + "/wlp-" + result.getAt('type') + "-" +
 				result.getAt('version') + ".zip")
 			
-			println("INFO: runtimeUrl is  " + result.getAt('runtimeUrl'))
+			logger.debug 'runtimeUrl is ' + result.getAt('runtimeUrl')
 		}
 		
         if (project.liberty.install.baseDir == null) {
@@ -87,7 +87,6 @@ class InstallLibertyTask extends AbstractTask {
 
         result.put('offline', project.gradle.startParameter.offline)
 
-        return result;
+        return result
     }
-
 }
