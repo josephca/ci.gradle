@@ -30,6 +30,21 @@ class LibertyTest extends AbstractIntegrationTest{
         deleteDir(integTestDir)
     }
 
+	@Test
+	public void test0_install() {
+		try {
+	        runTasks(integTestDir, 'installLiberty')
+			
+			def file = new File("build/integTest/build/wlp/lib/features/com.ibm.websphere.appserver.javaee-7.0.mf")
+		
+			assert file.exists() : "file not found"
+			assert file.canRead() : "file cannot be read"
+			
+	    } catch (Exception e) {
+            throw new AssertionError ("Fail on task installLiberty. "+e)
+        }
+	}	
+
     @Test
     public void test1_start() {
         try {

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corporation 2015.
+ * (C) Copyright IBM Corporation 2015, 2017.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,11 +42,6 @@ abstract class AbstractIntegrationTest {
             createFile(integTestDir)
         }else if(test_mode == "online"){
             createFile(integTestDir)
-            try {
-                runTasks(integTestDir, 'installLiberty')
-            } catch (Exception e) {
-                throw new AssertionError ("Fail on task installLiberty. "+e)
-            }
         }
     }
 
