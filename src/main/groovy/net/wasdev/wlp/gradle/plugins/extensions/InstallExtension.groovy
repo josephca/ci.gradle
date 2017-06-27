@@ -19,6 +19,7 @@ class InstallExtension {
     
     String licenseCode
     String version
+	String repository 
     String runtimeUrl
     String baseDir
     String cacheDir
