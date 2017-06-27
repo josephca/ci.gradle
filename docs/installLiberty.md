@@ -38,9 +38,9 @@ In certain cases, the Liberty license code may need to be provided in order to i
 
     liberty {
         install {
-            repository = "maven"
-		version = "17.0.0.2" 
-		type = "javaee7"  
+        	repository = "maven"
+        	version = "17.0.0.2" 
+        	type = "webProfile7"  
         }
     }
   ```  
